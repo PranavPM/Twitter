@@ -1,0 +1,35 @@
+<%= stylesheet_link_tag "search_bar.css" %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Search tweets</h1>
+      <div id="custom-search-input">
+        <div class="input-group col-md-12">
+          <%= render 'form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h4 id="notice"><%= notice %></h4>
+  <h1> Recent tweets</h1>
+  <table class="table table-bordered table-hover">
+    <tr class="info-bc" style="background-color:#3399FF">
+      <th>Tweet_Id</th>
+      <th>Tweet</th>
+      <th>Author</th>
+    </tr>
+
+    <% @testimonies.where(:session_id => @session).order("id desc").limit(20).each do |testimony| %>
+
+    <tr>
+      <td><%=testimony.tweet_id%></td>
+      <td><%=testimony.content%></td>
+      <td><%=testimony.screen_name%></td>
+    </tr>
+    <% end %>
+
+
+  </table>
+
+  <h4><%= link_to 'Clear All', destroy_path, method: :delete , data:{confirm:'Are you sure you want to clear all?'}%></h4>
+</div>
